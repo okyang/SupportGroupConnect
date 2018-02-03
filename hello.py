@@ -26,7 +26,7 @@ def do_admin_login():
     if password is not None and request.form['password'] == password[0]:
     	session['logged_in'] = True
     else:
-    	flash('That\'s the wrong password!')
+    	flash('Invalid username/password; please try again.')
     
     return home()
 
