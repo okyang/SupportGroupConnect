@@ -18,7 +18,7 @@ def do_admin_login():
 
 	con = psycopg2.connect("host='localhost' dbname='SupportGroupConnect' user='postgres' password='password'")   
 	cur = con.cursor()
-	cur.execute("SELECT password  FROM users WHERE users.password = '" + request.form['password']+ "'")
+	cur.execute("SELECT password  FROM users WHERE users.username = '" + request.form['username']+ "'")
 	
 	password = cur.fetchone()
 	
@@ -30,12 +30,22 @@ def do_admin_login():
 		flash('That\'s the wrong password!')
 
 	return home()
+	
+@app.route('/createaccount')
+def loadcreateaccount():
+	return render_template('createaccount.html', createaccountforreal = createaccountforreal)
+	
+@app.route('/createaccountforreal', methods = ['POST'])
+def createaccountforreal():
+	con = psycopg2.connect("host='localhost' dbname='SupportGroupConnect' user='postgres' password='password'")   
+	cur = con.cursor()
+	cur.execute("INSERT INTO users (username, password) VALUES ('" + request.form['username'] + "', '" + request.form['password'] + "')")
+	return render_template('login.html')
 
 @app.route('/logout')
 def logout():
     session['logged_in'] = False
     return home()
-
 
 if __name__ == "__main__":
     app.secret_key = os.urandom(12)
