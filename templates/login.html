@@ -3,7 +3,12 @@
 {% if session['logged_in'] %}
 <p>You're logged in already!</p>
 {% else %}
- 
+
+{% with messages = get_flashed_messages() %}
+  {% for message in messages %}
+    <div class="Error">{{ message }}</div>
+  {% endfor %}
+{% endwith %}
  
 <form action="/login" method="POST">
 	<div class="login">
