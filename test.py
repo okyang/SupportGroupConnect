@@ -4,7 +4,7 @@ import sys
 con = None
  
 try:
-    con = psycopg2.connect("host='localhost' dbname='supportGroupConnect' user='postgres' password='Student0814'")   
+    con = psycopg2.connect("host='localhost' dbname='supportGroupConnect' user='postgres' password='password'")   
     cur = con.cursor()
     cur.execute("CREATE TABLE Users(id SERIAL, Username VARCHAR(20), Password VARCHAR(20))")
     cur.execute("INSERT INTO Users (username, password) VALUES('ImMarsh','password123')")
