@@ -1,25 +1,35 @@
 from flask import Flask
 from flask import Flask, flash, redirect, render_template, request, session, abort
 import os
- 
+import psycopg2
+import sys
+
 app = Flask(__name__)
 
 @app.route('/')
 def home():
     if not session.get('logged_in'):
         return render_template('login.html')
-    else:
+    else:	
         return "Hi"
 
 @app.route('/login', methods=['POST'])
 def do_admin_login():
-    print(request.form())
-    if request.form['password'] == 'password':
-        session['logged_in'] = True
-    else:
-        flash('That\'s the wrong password!')
-    
-    return home()
+
+	con = psycopg2.connect("host='localhost' dbname='SupportGroupConnect' user='postgres' password='password'")   
+	cur = con.cursor()
+	cur.execute("SELECT password  FROM users WHERE users.password = '" + request.form['password']+ "'")
+	
+	password = cur.fetchone()
+	
+	con.commit()
+
+	if password is not None and request.form['password'] == password[0]:
+		session['logged_in'] = True
+	else:
+		flash('That\'s the wrong password!')
+
+	return home()
 
 @app.route('/logout')
 def logout():
