@@ -39,7 +39,8 @@ def loadcreateaccount():
 def createaccountforreal():
 	con = psycopg2.connect("host='localhost' dbname='SupportGroupConnect' user='postgres' password='password'")   
 	cur = con.cursor()
-	cur.execute("INSERT INTO users (username, password) VALUES ('" + request.form['username'] + "', '" + request.form['password'] + "')")
+	cur.execute("INSERT INTO Users (username, password) VALUES ('" + request.form['username'] + "', '" + request.form['password'] + "')")
+	con.commit()
 	return render_template('login.html')
 
 @app.route('/logout')
