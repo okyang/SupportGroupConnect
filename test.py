@@ -8,12 +8,12 @@ try:
 	cur = con.cursor()
 	cur.execute("DROP TABLE IF EXISTS Users, Friends, Condition, Messages")
 
-	cur.execute("CREATE TABLE Users(id SERIAL, Username VARCHAR(20), Password VARCHAR(20))")
-	cur.execute("INSERT INTO Users (username, password) VALUES('ImMarsh','password123')")
-	cur.execute("INSERT INTO Users (username, password) VALUES('EZMoney','321password')")
-	cur.execute("INSERT INTO Users (username, password) VALUES('Doorick','456password')")
-	cur.execute("INSERT INTO Users (username, password) VALUES('Gloasi','password456')")
-	cur.execute("INSERT INTO Users (username, password) VALUES('Salcidoo','passwordpassword')")
+	cur.execute("CREATE TABLE Users(id SERIAL, Username VARCHAR(20), Password VARCHAR(20), Bio VARCHAR(300))")
+	cur.execute("INSERT INTO Users (username, password, Bio) VALUES('ImMarsh','password123','double yikes')")
+	cur.execute("INSERT INTO Users (username, password, Bio) VALUES('EZMoney','321password','i hate my  friend marshall')")
+	cur.execute("INSERT INTO Users (username, password, Bio) VALUES('Doorick','456password','so tired')")
+	cur.execute("INSERT INTO Users (username, password, Bio) VALUES('Gloasi','password456','too much kpop')")
+	cur.execute("INSERT INTO Users (username, password, Bio) VALUES('Salcidoo','passwordpassword','yadada')")
 
 	cur.execute("CREATE TABLE Friends(friendship_ID SERIAL PRIMARY KEY, id INTEGER, friend_name VARCHAR(20))")
 	cur.execute("INSERT INTO Friends (id, friend_name) VALUES('1','EZMoney')")
