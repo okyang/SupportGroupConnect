@@ -1,4 +1,12 @@
-<link rel="stylesheet" href="/static/login.css" type="text/css">
+<!DOCTYPE html>
+<html>
+<header>
+	<title>Support Group Connect Login</title>
+	<meta charset="UTF-8">
+	
+	<link rel="stylesheet" href="/static/login.css" type="text/css">
+</header>
+<body>
 {% block body %}
 {% if session['logged_in'] %}
 <p>You're logged in already!</p>
@@ -40,6 +48,10 @@
 		</div>
 	</div>
 </form>
- 
+
 {% endif %}
 {% endblock %}
+
+</body>
+
+</html>
