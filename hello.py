@@ -69,6 +69,10 @@ def createaccountforreal():
 def logout():
     session['logged_in'] = False
     return home()
+ 
+@app.route('/chatroomcancer')
+def chatroomcancer():
+    return render_template('chatroomcancer.html', username = request.form['username'])
 
 if __name__ == "__main__":
     app.secret_key = os.urandom(12)
