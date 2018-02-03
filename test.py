@@ -4,7 +4,7 @@ import sys
 con = None
  
 try:
-    con = psycopg2.connect("host='localhost' dbname='supportGroupConnect' user='postgres' password='password'")   
+    con = psycopg2.connect("host='localhost' dbname='supportGroupConnect' user='postgres' password='Student0814'")   
     cur = con.cursor()
     cur.execute("CREATE TABLE Users(id SERIAL, Username VARCHAR(20), Password VARCHAR(20))")
     cur.execute("INSERT INTO Users (username, password) VALUES('ImMarsh','password123')")
@@ -13,12 +13,12 @@ try:
     cur.execute("INSERT INTO Users (username, password) VALUES('Gloasi','password456')")
     cur.execute("INSERT INTO Users (username, password) VALUES('Salcidoo','passwordpassword')")
     
-    cur.execute("CREATE TABLE Friends(Id INTEGER, friend_name VARCHAR(20), friendship_ID INTEGER PRIMARY KEY)")
-    cur.execute("INSERT INTO Friends VALUES(1,'EZMoney','1')")
-    cur.execute("INSERT INTO Friends VALUES(2,'Doorick','2')")
-    cur.execute("INSERT INTO Friends VALUES(3,'Gloasi','3')")
-    cur.execute("INSERT INTO Friends VALUES(4,'ImMarsh','4')")
-    cur.execute("INSERT INTO Friends VALUES(5,'Doorick','5')")
+    cur.execute("CREATE TABLE Friends(friendship_ID SERIAL PRIMARY KEY, id INTEGER, friend_name VARCHAR(20))")
+    cur.execute("INSERT INTO Friends (id, friend_name) VALUES('1','EZMoney')")
+    cur.execute("INSERT INTO Friends (id, friend_name) VALUES('2','Doorick')")
+    cur.execute("INSERT INTO Friends (id, friend_name) VALUES('3','Gloasi')")
+    cur.execute("INSERT INTO Friends (id, friend_name) VALUES('4','ImMarsh')")
+    cur.execute("INSERT INTO Friends (id, friend_name) VALUES('5','Doorick')")
     
     
     cur.execute("CREATE TABLE Condition(Id INTEGER PRIMARY KEY, condition VARCHAR(20))")
