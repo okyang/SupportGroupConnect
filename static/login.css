@@ -5,9 +5,17 @@ box-sizing: border-box;
 *:focus {
 	outline: none;
 }
+
 body {
 font-family: Arial;
 background-color: #3498DB;
+padding: 50px;
+}
+
+#title {
+text-align: center;
+color: white;
+font-family: Arial;
 padding: 50px;
 }
 

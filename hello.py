@@ -1,4 +1,3 @@
-from flask import Flask
 from flask import Flask, flash, redirect, render_template, request, session, abort
 import os
 import psycopg2
@@ -11,26 +10,26 @@ def home():
     if not session.get('logged_in'):
         return render_template('login.html')
     else:	
-        return "Hi"
+        return render_template('portal.html', username = request.form['username'])
 
 @app.route('/login', methods=['POST'])
 def do_admin_login():
 
-	con = psycopg2.connect("host='localhost' dbname='supportGroupConnect' user='postgres' password='password'")   
-	cur = con.cursor()
-	cur.execute("SELECT password  FROM users WHERE users.username = '" + request.form['username']+ "'")
-	
-	password = cur.fetchone()
-	
-	con.commit()
+    con = psycopg2.connect("host='localhost' dbname='supportGroupConnect' user='postgres' password='password'")   
+    cur = con.cursor()
+    cur.execute("SELECT password  FROM users WHERE users.username = '" + request.form['username']+ "'")
+    
+    password = cur.fetchone()
+    
+    con.commit()
+     
+    if password is not None and request.form['password'] == password[0]:
+    	session['logged_in'] = True
+    else:
+    	flash('That\'s the wrong password!')
+    
+    return home()
 
-	if password is not None and request.form['password'] == password[0]:
-		session['logged_in'] = True
-	else:
-		flash('That\'s the wrong password!')
-
-	return home()
-	
 @app.route('/createaccount')
 def loadcreateaccount():
 	return render_template('createaccount.html', createaccountforreal = createaccountforreal)
