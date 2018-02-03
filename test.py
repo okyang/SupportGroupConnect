@@ -14,19 +14,19 @@ try:
     cur.execute("INSERT INTO Users (username, password) VALUES('Salcidoo','passwordpassword')")
     
     cur.execute("CREATE TABLE Friends(Id INTEGER, friend_name VARCHAR(20), friendship_ID INTEGER PRIMARY KEY)")
-    cur.execute("INSERT INTO Friends VALUES(11111,'EZMoney','1')")
-    cur.execute("INSERT INTO Friends VALUES(22222,'Doorick','2')")
-    cur.execute("INSERT INTO Friends VALUES(33333,'Gloasi','3')")
-    cur.execute("INSERT INTO Friends VALUES(55555,'ImMarsh','4')")
-    cur.execute("INSERT INTO Friends VALUES(44444,'Doorick','5')")
+    cur.execute("INSERT INTO Friends VALUES(1,'EZMoney','1')")
+    cur.execute("INSERT INTO Friends VALUES(2,'Doorick','2')")
+    cur.execute("INSERT INTO Friends VALUES(3,'Gloasi','3')")
+    cur.execute("INSERT INTO Friends VALUES(4,'ImMarsh','4')")
+    cur.execute("INSERT INTO Friends VALUES(5,'Doorick','5')")
     
     
     cur.execute("CREATE TABLE Condition(Id INTEGER PRIMARY KEY, condition VARCHAR(20))")
-    cur.execute("INSERT INTO Condition VALUES(11111,'depression')")
-    cur.execute("INSERT INTO Condition VALUES(22222,'pneumonia')")
-    cur.execute("INSERT INTO Condition VALUES(33333,'PTSD')")
-    cur.execute("INSERT INTO Condition VALUES(55551,'broken_arm')")
-    cur.execute("INSERT INTO Condition VALUES(55555,'broken_ankle')")  
+    cur.execute("INSERT INTO Condition VALUES(1,'depression')")
+    cur.execute("INSERT INTO Condition VALUES(2,'pneumonia')")
+    cur.execute("INSERT INTO Condition VALUES(3,'PTSD')")
+    cur.execute("INSERT INTO Condition VALUES(4,'broken_arm')")
+    cur.execute("INSERT INTO Condition VALUES(5,'broken_ankle')")  
     con.commit()
     
 except psycopg2.DatabaseError as e:
