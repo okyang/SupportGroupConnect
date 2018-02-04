@@ -30,6 +30,18 @@ try:
 	while row != None:
 		print(row)
 		row = cur.fetchone()
+	cur.execute("SELECT * FROM groups")
+	row = cur.fetchone()
+	print("\n Groups Table")
+	while row != None:
+		print(row)
+		row = cur.fetchone()
+	cur.execute("SELECT * FROM memberships")
+	row = cur.fetchone()
+	print("\n Memberships Table")
+	while row != None:
+		print(row)
+		row = cur.fetchone()
 
 	
 	con.commit()
