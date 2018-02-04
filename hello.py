@@ -5,6 +5,9 @@ import sys
 
 app = Flask(__name__)
 
+
+
+
 @app.route('/')
 def home():
 	if not session.get('logged_in'):
@@ -67,11 +70,10 @@ def logout():
     session['logged_in'] = False
     return home()
  
-@app.route('/login/chatroomcancer')
+@app.route('/chatroomcancer')
 def chatroomcancer():
-	print("user2:  ", request.form['username'])
-	return render_template('chatroomcancer.html') #username = request.form['username'])
+    return render_template('chatroomcancer.html', username = request.form['username'])
 
 if __name__ == "__main__":
     app.secret_key = os.urandom(12)
-    app.run(debug=True, host='0.0.0.0', port=4000)
+    app.run(debug=True)#host='0.0.0.0', port=4000)
