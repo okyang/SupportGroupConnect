@@ -24,7 +24,7 @@
 		}
 		var suggestionlist = {{suggestionlist|tojson}}
 		for(i = 0; i < suggestionlist.length; i++){
-			$('#suggestionlist ul').append("<li>" + suggestionlist[i] + "</li>")
+			$('#suggestionlist ul').append("<li style='color: white'>" + suggestionlist[i] + "</li>")
 		}
 	})
 </script>
@@ -50,7 +50,7 @@ Support Group Connect is here to help you find a support group going through sim
 
 <div id="suggestionlist">
 <h2 style="color:white">Suggestion List:</h2>
-<ul></ul>
+<ul style="list-style-type: none"></ul>
 </div>
 
 <h2 style="color:white">Suggested Group Chats:</h2>
