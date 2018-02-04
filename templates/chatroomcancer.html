@@ -9,15 +9,17 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	var socket = io.connect('http://127.0.0.1:5000');
-	socket.on('connect', function() {
+	socket.on('connect', function() 
+	{
 		socket.send('{{name}} has connected!');
 	});
 	socket.on('message', function(msg) {
-		$("#messages").append('<li>' + '{{name}}' + ": " + msg+'</li>');
+		$("#messages").append('<li>' + msg + '</li>');
 		console.log('Received message');
 	});
 	$('#sendbutton').on('click', function() {
-		socket.send($('#myMessage').val());
+		/* socket.send($('#myMessage').val()); */
+		socket.send( '{{name}}: ' + $('#myMessage').val() ); 
 		$('#myMessage').val('');
 	});
 });
