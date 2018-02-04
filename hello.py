@@ -6,37 +6,40 @@ import sys
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/', methods = ['GET', 'POST'])
 def home():
 	if not session.get('logged_in'):
 		return render_template('login.html')
 	else:	
-		con = psycopg2.connect("host='localhost' dbname='supportGroupConnect' user='postgres' password='password'")
-		cur = con.cursor()
-		cur.execute("SELECT condition  FROM condition WHERE condition.id = '" +session['user_id']+"'")
-		q_condition = cur.fetchone()
-		
-		cur.execute("SELECT username FROM users INNER JOIN friends ON users.id = friends.second_id WHERE first_id='"
-						+ session['user_id'] + "'")
-		friendlist = []
-		row = cur.fetchone()
-		while row != None:
-			friendlist += row
-			row = cur.fetchone()
-			
-		#cur.execute("(SELECT username FROM users INNER JOIN condition ON '" + session['condition'] + "' = condition AND '"+ session['user_id'] +"' != condition.ID)")
-		cur.execute("SELECT username FROM users INNER JOIN condition ON users.id = condition.id WHERE condition.id !=" 
-						+ session['user_id'] + " AND condition = '" + session['condition'] + "'")
-		suggestionlist = []
-		row = cur.fetchone()
-		while row != None:
-			suggestionlist += row
-			row = cur.fetchone()
-		
-		con.close()
-		return render_template('portal.html', username = request.form['username'], condition = q_condition, friendlist = friendlist,
-								suggestionlist = suggestionlist)
+		portal_info = prepare_portal()
+		return render_template('portal.html', condition = portal_info[0], friendlist = portal_info[1],
+								suggestionlist = portal_info[2])
 
+def prepare_portal():
+	con = psycopg2.connect("host='localhost' dbname='supportGroupConnect' user='postgres' password='password'")
+	cur = con.cursor()
+	cur.execute("SELECT condition  FROM condition WHERE condition.id = '" +session['user_id']+"'")
+	q_condition = cur.fetchone()
+
+	cur.execute("SELECT username FROM users INNER JOIN friends ON users.id = friends.second_id WHERE first_id='"
+					+ session['user_id'] + "'")
+	friendlist = []
+	row = cur.fetchone()
+	while row != None:
+		friendlist += row
+		row = cur.fetchone()
+		
+	cur.execute("SELECT username FROM users INNER JOIN condition ON users.id = condition.id WHERE condition.id !=" 
+					+ session['user_id'] + " AND condition = '" + session['condition'] + "'")
+	suggestionlist = []
+	row = cur.fetchone()
+	while row != None:
+		suggestionlist += row
+		row = cur.fetchone()
+
+	con.close()
+	return (q_condition, friendlist, suggestionlist)
+							
 @app.route('/login', methods=['POST'])
 def do_admin_login():
 
@@ -86,6 +89,25 @@ def createaccountforreal():
 def chatroomcancer():
 	return render_template('chatroomcancer.html', name = session['username'])
 
+@app.route('/addfriend', methods=['POST'])
+def addfriend():
+	con = psycopg2.connect("host='localhost' dbname='supportGroupConnect' user='postgres' password='password'")   
+	cur = con.cursor()
+	cur.execute("SELECT id FROM users WHERE users.username = '" + request.form['friendname'] + "'")
+	friend_id = cur.fetchone()
+	if friend_id != None:
+		cur.execute("INSERT INTO friends (first_id, second_id) VALUES ('" + str(session['user_id']) + "', '" + str(friend_id[0]) + "')")
+		con.commit()
+	else:
+		#print error message if user does not exist
+		pass
+	con.close()
+	portal_info = prepare_portal()
+	return render_template('portal.html', condition = portal_info[0], friendlist = portal_info[1],
+								suggestionlist = portal_info[2])
+	#return redirect(url_for('home'))
+	#return render_template('portal.html')
+	
 @app.route('/logout')
 def logout():
     session['logged_in'] = False

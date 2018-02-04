@@ -24,7 +24,7 @@
 </head>
 
 <h1 id = "title">Social Support Group App </h1>
-<h2 class = "bdy"> Welcome {{username}} </h2>
+<h2 class = "bdy"> Welcome {{session['username']}} </h2>
 <p class = "bdy">
 Support Group Connect is here to help you find a support group going through similar times as you have.  
 </p>
@@ -45,11 +45,11 @@ Support Group Connect is here to help you find a support group going through sim
 <ul>
 	<li> <a href= "http://localhost:4000/login/chatroomcancer"> Cancer Connect</a></li>
 	<!-- Above is proabably different for all of us -->
-
-<!-- 	<li>Derek</li>
-	<li>Marissa</li>
-	<li>Marshall</li>
-	<li>Josh</li> -->
 </ul>
+
+<form action="/addfriend" method = "POST">
+	<input type="text" name="friendname">
+	<input type="submit" value="add friend">
+</form>
 
 </html>
