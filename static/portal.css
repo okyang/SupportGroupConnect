@@ -9,6 +9,7 @@ box-sizing: border-box;
 body {
 font-family: Arial;
 background-color: #3498DB;
+text-align: center
 }
 
 #title {
@@ -20,7 +21,7 @@ font-family: Arial;
 .bdy{
 color: white;
 font-family: Arial;
+text-align: center
 }
 
-}
 

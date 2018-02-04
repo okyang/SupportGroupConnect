@@ -12,8 +12,15 @@
 <script>
 	$(document).ready(function(){
 		var friendlist = {{friendlist|tojson}}
+		var className = ""
 		for(i = 0; i < friendlist.length; i++){
-			$('#friendlist ul').append("<li>" + friendlist[i] + "</li>")
+			if(i%2 == 0){
+				className = "notendofline"
+			}
+			else{
+				className = "endofline"
+			}
+			$('#friendlist ul').append("<li style='color: white' class='" + className + "'>" + friendlist[i] + "</li>")
 		}
 		var suggestionlist = {{suggestionlist|tojson}}
 		for(i = 0; i < suggestionlist.length; i++){
@@ -21,31 +28,38 @@
 		}
 	})
 </script>
+<style>
+
+</style>
 </head>
 
 <h1 id = "title">Social Support Group App </h1>
-<h2 class = "bdy"> Welcome {{session['username']}} </h2>
+<h2 class = "bdy" style="text-align:center"> Welcome {{session['username']}} </h2>
 <p class = "bdy">
+
+<h4 style="text-align: center"><a href = "/logout">Logout</a></h4>
+<p class = "bdy" style="text-align: center">
+
 Support Group Connect is here to help you find a support group going through similar times as you have.  
 </p>
 
-<a href = "/logout">Logout</a>
-
 <div id="friendlist">
-<h1>Friend List</h1>
-<ul></ul>
+<h2 style="color:white">Friend List:</h2>
+<ul style="list-style-type: none"></ul>
 </div>
 
 <div id="suggestionlist">
-<h1>Suggestion List</h1>
+<h2 style="color:white">Suggestion List:</h2>
 <ul></ul>
 </div>
 
-<h4 class = "bdy">Suggested Group Chat</h4>
-<ul>
-	<li> <a href= "http://localhost:4000/login/chatroomcancer"> Cancer Connect</a></li>
-	<!-- Above is proabably different for all of us -->
-</ul>
+<h2 style="color:white">Suggested Group Chats:</h2>
+<h2><a href="google.com" style="text-transform: capitalize">{{session['condition']}} Connect</a></h2>
+
+<h2 style="color:white">Other Group Chats:</h2>
+<h2><a href= "http://localhost:4000/login/chatroomcancer">Cancer Connect</a></h2>
+
+<h2 style="color:white">Add a Friend:</h2>
 
 <form action="/addfriend" method = "POST">
 	<input type="text" name="friendname">

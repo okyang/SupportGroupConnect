@@ -2,11 +2,27 @@
 <head>
 <title>Chat Room</title>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/static/chatroom.css" type="text/css"> 
+
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.8/socket.io.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
 </head>
 <body>
+  
+<h1 id = "welcome"> Cancer Support Group Chat</h1>
+<p class = "rules">
+Please keep the following rules in mind when using this group chat.
+<br>	- Introduce yourself!
+<br>	- Please be respectful to others
+<br>	- Do not spam this chat 
+<br>	- Try to be supportive
+<br>	- Remember, these are real people looking for support too!
+<br>
+</p>
+  
 <script type="text/javascript">
+
 $(document).ready(function() {
 	var socket = io.connect('http://127.0.0.1:5000');
 	socket.on('connect', function() 
@@ -14,7 +30,7 @@ $(document).ready(function() {
 		socket.send('{{name}} has connected!');
 	});
 	socket.on('message', function(msg) {
-		$("#messages").append('<li>' + msg + '</li>');
+		$("#messages").append('<li class="msg">' + msg + '</li>');
 		console.log('Received message');
 	});
 	$('#sendbutton').on('click', function() {
@@ -24,8 +40,21 @@ $(document).ready(function() {
 	});
 });
 </script>
+
+
 <ul id="messages"></ul>
-<input type="text" id="myMessage">
+
+<input id="myMessage">
 <button id="sendbutton">Send</button>
+
+<script>
+var input = document.getElementById("myMessage");
+input.addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        document.getElementById("sendbutton").click();
+    }
+});
+</script>
 </body>
 </html>
