@@ -1,0 +1,33 @@
+* {
+box-sizing: border-box;
+}
+ 
+*:focus {
+	outline: none;
+}
+
+body {
+	font-family: Arial;
+	background-color: #CBF0F2;
+}
+
+#welcome{
+  
+}
+
+p.rules{
+	outline-style: solid;
+}
+
+.msg{
+	margin-left: auto;
+	margin-right: auto;
+	width: 24em;
+
+}
+
+
+
+ul{
+	list-style-type: none;
+}
