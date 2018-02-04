@@ -24,8 +24,20 @@ $(document).ready(function() {
 	});
 });
 </script>
+
 <ul id="messages"></ul>
-<input type="text" id="myMessage">
+
+<input id="myMessage">
 <button id="sendbutton">Send</button>
+
+<script>
+var input = document.getElementById("myMessage");
+input.addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        document.getElementById("sendbutton").click();
+    }
+});
+</script>
 </body>
 </html>
