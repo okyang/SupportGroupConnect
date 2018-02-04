@@ -2,26 +2,8 @@
 <html>
 <title>Support Group Connect Portal</title>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="/static/portal.css" type="text/css">
 
-<head>
-<title>Support Group Connect Portal</title>
-<meta charset="UTF-8">
 <link rel="stylesheet" href="/static/portal.css" type="text/css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
-	$(document).ready(function(){
-		var friendlist = {{friendlist|tojson}}
-		for(i = 0; i < friendlist.length; i++){
-			$('#friendlist ul').append("<li>" + friendlist[i] + "</li>")
-		}
-		var suggestionlist = {{suggestionlist|tojson}}
-		for(i = 0; i < suggestionlist.length; i++){
-			$('#suggestionlist ul').append("<li>" + suggestionlist[i] + "</li>")
-		}
-	})
-</script>
-</head>
 
 <h1 id = "title">Social Support Group App </h1>
 <h2 class = "bdy"> Welcome {{username}} </h2>
@@ -30,16 +12,6 @@ Support Group Connect is here to help you find a support group going through sim
 </p>
 
 <a href = "/logout">Logout</a>
-
-<div id="friendlist">
-<h1>Friend List</h1>
-<ul></ul>
-</div>
-
-<div id="suggestionlist">
-<h1>Suggestion List</h1>
-<ul></ul>
-</div>
 
 <h4 class = "bdy">Suggested Group Chat</h4>
 <ul>
